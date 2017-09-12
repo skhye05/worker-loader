@@ -17,7 +17,7 @@ def remove_log(file_path):
 def execute_command(command, out_file):
     def fork_it():
         print "Executing " + command
-        os.system(command + ' |& tee ' + out_file)
+        os.system(command + " 1> " + out_file + " 2>&1")
 
     t = multiprocessing.Process(target=fork_it)
     t.daemon = True
@@ -42,6 +42,8 @@ def is_containing(expected, log_file):
 
 class RunWorkers_Tests(unittest.TestCase):
     EXPECTED_MESSAGES = ["Inside JS worker...", "JS worker", "Inside TS worker...", "TS Worker"]
+    ANDROID_HOME = os.environ.get('ANDROID_HOME')
+    ADB_PATH = os.path.join(ANDROID_HOME, 'platform-tools', 'adb')
 
     @classmethod
     def setUpClass(cls, logfile=""):
@@ -54,7 +56,7 @@ class RunWorkers_Tests(unittest.TestCase):
 
     def test001_run_android(self):
         execute_command("npm run start-android-bundle -- --justlaunch", "log_android.txt")
-        execute_command("adb logcat", "logcat.txt")
+        execute_command(self.ADB_PATH + " logcat", "logcat.txt")
         assert is_containing("Successfully started on device", "log_android.txt"), "App not started on device"
         for i in self.EXPECTED_MESSAGES:
             assert is_containing(i, "logcat.txt"), i + " not found in logcat.txt"

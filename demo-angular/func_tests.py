@@ -54,15 +54,16 @@ class RunWorkers_Tests(unittest.TestCase):
         remove_log("log.txt")
         execute_command("npm i", "log.txt")
 
+
     def test001_run_android(self):
-        execute_command("npm run start-android-bundle -- --justlaunch", "log_android.txt")
-        execute_command(self.ADB_PATH + " logcat", "logcat.txt")
+        execute_command("npm run start-android-bundle -- --justlaunch --device " + self.DEVICE, "log_android.txt")
         assert is_containing("Successfully started on device", "log_android.txt"), "App not started on device"
+        execute_command(self.ADB_PATH + " -d logcat org.nativescript.webworkerdemo", "logcat.txt")
         for i in self.EXPECTED_MESSAGES:
             assert is_containing(i, "logcat.txt"), i + " not found in logcat.txt"
 
     def test002_run_ios(self):
-        execute_command("npm run start-ios-bundle -- --justlaunch", "log_ios.txt")
+        execute_command("npm run start-ios-bundle -- --justlaunch --emulator", "log_ios.txt")
         execute_command("idevicesyslog", "syslog.txt")
         assert is_containing("Successfully started on device", "log_ios.txt"), "App not started on device"
     #     for i in EXPECTED_MESSAGES:

@@ -6,10 +6,10 @@
   "nativescript": {
     "id": "org.nativescript.webworkerdemo",
     "tns-android": {
-      "version": "next"
+      "version": "3.3.1"
     },
     "tns-ios": {
-      "version": "next"
+      "version": "latest"
     }
   },
   "dependencies": {
@@ -21,11 +21,11 @@
     "@angular/http": "~4.2.0",
     "@angular/platform-browser": "~4.2.0",
     "@angular/router": "~4.2.0",
-    "nativescript-angular": "next",
+    "nativescript-angular": "latest",
     "nativescript-theme-core": "~1.0.2",
     "reflect-metadata": "~0.1.8",
     "rxjs": "~5.3.0",
-    "tns-core-modules": "next",
+    "tns-core-modules": "latest",
     "zone.js": "~0.8.2"
   },
   "devDependencies": {
@@ -39,14 +39,14 @@
     "lazy": "1.0.11",
     "nativescript-css-loader": "~0.26.0",
     "nativescript-dev-typescript": "~0.4.0",
-    "nativescript-dev-webpack": "next",
+    "nativescript-dev-webpack": "latest",
+    "nativescript-worker-loader": "file:../src",
     "raw-loader": "~0.5.1",
     "resolve-url-loader": "~2.1.0",
     "typescript": "~2.2.1",
     "webpack": "~3.2.0",
     "webpack-bundle-analyzer": "^2.8.2",
-    "webpack-sources": "~1.0.1",
-    "nativescript-worker-loader": "file:../src"
+    "webpack-sources": "~1.0.1"
   },
   "scripts": {
     "ns-bundle": "ns-bundle",
